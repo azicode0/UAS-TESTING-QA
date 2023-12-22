@@ -5,10 +5,9 @@ on:
       - dev-test
   push:
     branches:
-      - dev-test
+      - master
 jobs:
-  pr-only:
-    if: github.event_name == 'pull_request'
+  test:
     name: Build for PR only
     runs-on: ubuntu-latest
     steps:
@@ -18,8 +17,8 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           cache: pip
-          python-version: "3.9"
+          python-version: 3.9
       - name: Install requirements
         run: pip install -r requirements.txt
-      - name: Run ruff
-        run: ruff .
+      - name: Run tests
+        run: python -m pytest .
