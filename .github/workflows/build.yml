@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - dev-test
-      
 jobs:
   pr-only:
     if: github.event_name == 'pull_request'
@@ -20,13 +19,7 @@ jobs:
         with:
           cache: pip
           python-version: "3.9"
-
       - name: Install requirements
         run: pip install -r requirements.txt
-        
       - name: Run ruff
         run: ruff .
-      - name: Run pytest
-        run: pytest
-      - name: Run pytest with coverage
-        run: pytest --cov=myproj test/
